@@ -54,3 +54,5 @@ public:
 };
 
 #endif //LINKED_LIST_H
+
+// End of linked_list.hpp
