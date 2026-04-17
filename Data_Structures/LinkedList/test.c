@@ -1,14 +1,39 @@
+/**
+* Test file for linked_list.cpp
+*/
+
+#include <iostream>
+
+#include "linked_list.hpp"
+
+using namespace std;
+
+
 
 /**
 *
 */
-int main (int argc, char ** argv){
+bool test_new_list(){
+    LinkedList * p_test = new LinkedList();
+    bool ret_val = false;
 
+    if (nullptr == p_test)
+    {
+        cout << "null list\n";
+    }
+    else
+    {
+        cout << "good list\n";
+    }
+
+    return ret_val;
 }
 
 /**
-*
+* Main function to run tests
 */
-int test(int arg2, void * arg3){
-    return 0;
+int main (int argc, char ** argv){
+    cout << "test\n";
+
+    test_new_list();
 }

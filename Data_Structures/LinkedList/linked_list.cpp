@@ -6,6 +6,7 @@
 
 #include "linked_list.hpp"
 
+using namespace std;
 
 /**
 * Constructor. Creates new LinkedList with null head.
@@ -36,7 +37,7 @@ bool LinkedList::insert_front(void * p_data){
     node_t * p_new = nullptr;
 
     if (nullptr == p_data){
-        std::cerr << "LinkedList::insert_front: Bad argument passed in\n";
+        cerr << "LinkedList::insert_front: Bad argument passed in\n";
         goto EXIT;
     }
 
@@ -45,7 +46,7 @@ bool LinkedList::insert_front(void * p_data){
         // Create new node with p_data and current p_head as next. Will work if p_head is NULL or valid.
         p_new = new node_t(p_data, p_head);
     } catch (const std::bad_alloc& except) {
-        std::cerr << "LinkedList::insert_front: Out of memory; node init failed\n";
+        cerr << "LinkedList::insert_front: Out of memory; node init failed\n";
         goto EXIT;
     }
 
@@ -64,7 +65,7 @@ bool LinkedList::insert_back(void * p_data){
     node_t * p_curr = p_head;
 
     if (nullptr == p_data){
-        std::cerr << "LinkedList::insert_back: Bad argument passed in\n";
+        cerr << "LinkedList::insert_back: Bad argument passed in\n";
         goto EXIT;
     }
 
@@ -73,7 +74,7 @@ bool LinkedList::insert_back(void * p_data){
         // Create new node with p_data NULL next node.
         p_new = new node_t(p_data, NULL);
     } catch (const std::bad_alloc& except) {
-        std::cerr << "LinkedList::insert_back: Out of memory; node init failed\n";
+        cerr << "LinkedList::insert_back: Out of memory; node init failed\n";
         goto EXIT;
     }
 
@@ -201,12 +202,10 @@ bool LinkedList::delete_value(void * p_data){
         if (p_data == p_head->data) // found value
         {
             p_head = nullptr;
-            goto SUCCESS;
+            ret_val = true;
+            delete p_temp;
         }
-        else // Not in the only item in list
-        {
-            goto EXIT;
-        }
+        goto EXIT;
     }
 
     // Since we already checked the first value, assign p_prev to avoid null ptr dereference potential below.
@@ -239,10 +238,10 @@ EXIT:
 *    For now, just print the pointers.
 */
 void LinkedList::print_list(){
-    std::cout << "Linked list contains following pointers:\n";
+    cout << "Linked list contains following pointers:\n";
 
     if (isEmpty()){
-        std::cout << " - None (empty list)\n";
+        cout << " - None (empty list)\n";
     }
     else{
         node_t * p_temp = p_head;

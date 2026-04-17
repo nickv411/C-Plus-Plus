@@ -1,6 +1,9 @@
 
 clean:
-	rm a.out
+	rm linked_list.o test
 
 linked_list_lib:
-	g++ linked_list.cpp linked_list.hpp -o linked_list.o
+	g++ -c linked_list.cpp -o linked_list.o
+
+tests:
+	g++ linked_list.o test.c -o test
