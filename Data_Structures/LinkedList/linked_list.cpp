@@ -60,5 +60,32 @@ EXIT:
 bool LinkedList::insert_back(void * p_data){
     bool ret_val = false;
 
+    node_t * p_new = NULL;
+    node_t * p_curr = p_head;
+
+    if (nullptr == p_data){
+        std::cerr << "LinkedList::insert_back: Bad argument passed in\n";
+        goto EXIT;
+    }
+
+    // Try/catch around 'new' call
+    try {
+        // Create new node with p_data NULL next node.
+        p_new = new node_t(p_data, NULL);
+    } catch (const std::bad_alloc& except) {
+        std::cerr << "LinkedList::insert_back: Out of memory; node init failed\n";
+        goto EXIT;
+    }
+
+    // Loop through until last node
+    while (nullptr != p_curr->next)
+    {
+        p_curr = p_curr->next;
+    }
+
+    p_curr->next = p_new;
+    ret_val = true;
+
+EXIT:
     return ret_val;
 }
